@@ -19,7 +19,7 @@ let package = Package(
             name: "KivyCore",
             dependencies: [
         		.product(name: "SDL2Core", package: "SDL2Core"),
-        		.product(name: "SwiftonizeModules", package: "PythonSwiftLink"),
+        		.product(name: "SwiftonizeModules", package: "PySwiftKit"),
         		.product(name: "PythonCore", package: "PythonCore"),
         		"libkivy"
         	],
@@ -36,8 +36,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "libkivy",
-            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.0.17/libkivy.zip",
-            checksum: "772cbba15ed8e47e2de20118bc13bbb9433d6e551b633fe4ef3e9d3fa0585708"
+            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.0/libkivy.zip",
+            checksum: "8569e596e5167f93573e7a1a2a7251f1c7c5d68e7d72517d46bb52ec61692761"
         )
     ]
 )
