@@ -2,19 +2,20 @@
 import Foundation
 import UIKit
 import Combine
-import PythonCore
-import PySwiftCore
-import PyCallable
+
+import PySwiftKit
+import PySerializing
 import PyDictionary
+import PySwiftObject
+
+import PySwiftWrapper
 
 let iosWindow = UIApplication.shared.windows.first!
 
 let uiScale = UIScreen.main.nativeScale
 
 
-public func get_scale() -> Double {
-	uiScale
-}
+
 
 let devices: [String: Int] = [
 	"iPhone1,1": 163,
@@ -132,38 +133,63 @@ extension utsname {
 	}
 }
 
-func get_dpi() -> Int {
-	var systemInfo: utsname = .init()
-	uname(&systemInfo)
-	
-	let deviceName = systemInfo.machineString
-	if let foundDPI = devices[deviceName] {
-		return foundDPI
-	} else {
-		let scale = get_scale()
-		return switch UIDevice.current.userInterfaceIdiom {
-		case .phone: Int(163 * scale)
-		case .pad: Int(132 * scale)
-		default: Int(160 * scale)
-		}
-	}
+@PyModule
+struct Ios: PyModuleProtocol {
+    
+    @PyFunction
+    static func get_dpi() -> Int {
+        var systemInfo: utsname = .init()
+        uname(&systemInfo)
+        
+        let deviceName = systemInfo.machineString
+        if let foundDPI = devices[deviceName] {
+            return foundDPI
+        } else {
+            let scale = get_scale()
+            return switch UIDevice.current.userInterfaceIdiom {
+            case .phone: Int(163 * scale)
+            case .pad: Int(132 * scale)
+            default: Int(160 * scale)
+            }
+        }
+    }
+    
+    @PyFunction
+    static func get_safe_area() -> PyPointer? {
+        let dict = PyDict_New()!
+        
+        if #available(iOS 11.0, *) {
+            let safeArea = UIApplication.shared.delegate!.window!!.safeAreaInsets
+            PyDict_SetItem(dict, "top", safeArea.top)
+            PyDict_SetItem(dict, "bottom", safeArea.bottom)
+            PyDict_SetItem(dict, "left", safeArea.left)
+            PyDict_SetItem(dict, "right", safeArea.right)
+        } else {
+            PyDict_SetItem(dict, "top", 0.0)
+            PyDict_SetItem(dict, "bottom", 0.0)
+            PyDict_SetItem(dict, "left", 0.0)
+            PyDict_SetItem(dict, "right", 0.0)
+        }
+        return dict
+    }
+    
+    @PyFunction
+    static func get_scale() -> Double {
+        uiScale
+    }
+    
+    @PyFunction
+    static func get_kheight() -> Double {
+        iosKeyboard.kheight
+    }
+    
+    
+    static var py_classes: [any (PyClassProtocol & AnyObject).Type] = [
+        
+    ]
 }
 
-func get_safe_area() -> PyPointer {
-	let dict = PyDict_New()!
-	
-	if #available(iOS 11.0, *) {
-		let safeArea = UIApplication.shared.delegate!.window!!.safeAreaInsets
-		PyDict_SetItem(dict, "top", safeArea.top)
-		PyDict_SetItem(dict, "bottom", safeArea.bottom)
-		PyDict_SetItem(dict, "left", safeArea.left)
-		PyDict_SetItem(dict, "right", safeArea.right)
-	} else {
-		PyDict_SetItem(dict, "top", 0.0)
-		PyDict_SetItem(dict, "bottom", 0.0)
-		PyDict_SetItem(dict, "left", 0.0)
-		PyDict_SetItem(dict, "right", 0.0)
-	}
-	return dict
+extension PySwiftModuleImport {
+    public static let ios = PySwiftModuleImport(name: "ios", module: Ios.py_init)
 }
 

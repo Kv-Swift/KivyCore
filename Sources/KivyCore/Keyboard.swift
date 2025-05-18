@@ -1,10 +1,11 @@
 import Foundation
 import UIKit
 import Combine
-import PythonCore
-import PySwiftCore
-import PyCallable
+import PySwiftKit
+import PySerializing
 import PyDictionary
+
+
 
 import Foundation
 
@@ -18,11 +19,11 @@ fileprivate extension PyPointer {
 	}
 }
 
-public class IOSKeyboard: IOSKeyboard_PyProtocol {
+public class IOSKeyboard {
 	
 	static let shared = IOSKeyboard()
 	
-	let kivy_window = pythonImport(from: "kivy.core.window", import_name: "Window")!
+	let kivy_window = PyImport(from: "kivy.core.window", import_name: "Window")!
 	let trigger_keyboard_height = "trigger_keyboard_height".pyPointer
 	
 	var kheight: Double = 0
@@ -63,6 +64,4 @@ public class IOSKeyboard: IOSKeyboard_PyProtocol {
 
 let iosKeyboard = IOSKeyboard.shared
 
-func get_kheight() -> Double {
-	iosKeyboard.kheight
-}
+
