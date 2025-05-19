@@ -11,8 +11,7 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/KivySwiftLink/SDL2Core", .upToNextMajor(from: "311.0.0")),
         .package(url: "https://github.com/KivySwiftLink/PySwiftKit", .upToNextMajor(from: "311.0.0")),
-        .package(url: "https://github.com/KivySwiftLink/PythonCore", .upToNextMajor(from: "311.0.0")),
-        .package(url: "https://github.com/PythonSwiftLink/SwiftonizePlugin", .upToNextMajor(from: "0.0.0"))
+        .package(url: "https://github.com/KivySwiftLink/PythonCore", .upToNextMajor(from: "311.0.0"))
     ],
     targets: [
         .target(
@@ -31,13 +30,12 @@ let package = Package(
         		.linkedFramework("CoreMedia"),
         		.linkedFramework("CoreVideo")
         	],
-            plugins: [
-        		.plugin(name: "Swiftonize", package: "SwiftonizePlugin")]
+            plugins: []
         ),
         .binaryTarget(
             name: "libkivy",
-            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.7/libkivy.zip",
-            checksum: "b5ac027726d7cca10a1999cae6189a41d408767181b615ad2de445af7ace15b3"
+            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.8/libkivy.zip",
+            checksum: "c70f75d079b8f2161aa8bdc9952dbb89c6c0b0bfba5a8a754af933404b61c120"
         )
     ]
 )
