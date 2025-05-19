@@ -11,7 +11,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/KivySwiftLink/SDL2Core", .upToNextMajor(from: "311.0.0")),
         .package(url: "https://github.com/KivySwiftLink/PySwiftKit", .upToNextMajor(from: "311.0.0")),
-        .package(url: "https://github.com/KivySwiftLink/PythonCore", .upToNextMajor(from: "311.0.0"))
+        .package(url: "https://github.com/KivySwiftLink/PythonCore", .upToNextMajor(from: "311.0.0")),
+        .package(url: "https://github.com/PythonSwiftLink/PySwiftWrapper", .upToNextMajor(from: "0.0.0"))
     ],
     targets: [
         .target(
@@ -30,12 +31,13 @@ let package = Package(
         		.linkedFramework("CoreMedia"),
         		.linkedFramework("CoreVideo")
         	],
-            plugins: []
+            plugins: [
+        		.plugin(name: "PySwiftWrapper", package: "PySwiftWrapper")]
         ),
         .binaryTarget(
             name: "libkivy",
-            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.9/libkivy.zip",
-            checksum: "f1ebf78ba30fe8aeb6f74d64fdf295af18ffe166e05c7d1b9d60bff5678428d1"
+            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.10/libkivy.zip",
+            checksum: "a4a9e6abff0112b17fc8e22aa2fea1718151d77ce00cd4c5789d13011f93b1f6"
         )
     ]
 )
