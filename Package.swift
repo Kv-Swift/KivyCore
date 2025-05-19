@@ -21,6 +21,7 @@ let package = Package(
         		.product(name: "SDL2Core", package: "SDL2Core"),
         		.product(name: "SwiftonizeModules", package: "PySwiftKit"),
         		.product(name: "PythonCore", package: "PythonCore"),
+        		.product(name: "PySwiftWrapper", package: "PySwiftWrapper"),
         		"libkivy"
         	],
             resources: [
@@ -31,13 +32,12 @@ let package = Package(
         		.linkedFramework("CoreMedia"),
         		.linkedFramework("CoreVideo")
         	],
-            plugins: [
-        		.plugin(name: "PySwiftWrapper", package: "PySwiftWrapper")]
+            plugins: []
         ),
         .binaryTarget(
             name: "libkivy",
-            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.10/libkivy.zip",
-            checksum: "a4a9e6abff0112b17fc8e22aa2fea1718151d77ce00cd4c5789d13011f93b1f6"
+            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.11/libkivy.zip",
+            checksum: "b09101535703b814df0dd667d074e120d7289d7ba94feb67c03c71fabf793927"
         )
     ]
 )
