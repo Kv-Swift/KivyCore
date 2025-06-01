@@ -21,7 +21,6 @@ let package = Package(
         		.product(name: "SDL2Core", package: "SDL2Core"),
         		.product(name: "SwiftonizeModules", package: "PySwiftKit"),
         		.product(name: "PythonCore", package: "PythonCore"),
-        		.product(name: "PySwiftWrapper", package: "PySwiftWrapper"),
         		"libkivy"
         	],
             resources: [
@@ -36,8 +35,8 @@ let package = Package(
         ),
         .binaryTarget(
             name: "libkivy",
-            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.11/libkivy.zip",
-            checksum: "b09101535703b814df0dd667d074e120d7289d7ba94feb67c03c71fabf793927"
+            url: "https://github.com/kivyswiftlink/KivyCore/releases/download/311.1.12/libkivy.zip",
+            checksum: "1cf69e9010797ae87f01aff199a3985695eb138dcd7119e06a5c099b0e5a0f05"
         )
     ]
 )
