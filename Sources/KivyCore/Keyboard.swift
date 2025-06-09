@@ -4,7 +4,7 @@ import Combine
 import PySwiftKit
 import PySerializing
 import PyDictionary
-
+import PySwiftWrapper
 
 
 import Foundation
@@ -46,6 +46,8 @@ public class IOSKeyboard {
 			}
 		}
 	}
+    
+
 	
 	deinit {
 		kivy_window.decref()
